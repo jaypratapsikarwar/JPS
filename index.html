@@ -65,24 +65,28 @@
         ::-webkit-scrollbar-thumb { background: #d2d2d7; border-radius: 5px; border: 2px solid #fbfbfd; }
         ::-webkit-scrollbar-thumb:hover { background: #86868b; }
 
-        /* ADVANCED INSTAGRAM CROPPER */
-        /* This hides Instagram's ugly native UI and black bars */
+        /* ADVANCED INSTAGRAM CROPPER (FIXED) */
+        /* Aggressively chops off the top header and bottom comment section */
         .instagram-embed-cropper {
             position: absolute;
-            top: -65px; /* Hides Instagram native header */
-            left: -3%;  /* Hides left black bar */
-            width: 106%; /* Hides right black bar */
-            height: calc(100% + 180px); /* Hides Instagram bottom action bar */
+            top: -55px;      /* Crops the top Instagram header */
+            bottom: -160px;  /* Forcefully chops off the entire bottom likes/comments section */
+            left: -2px;      /* Hides left border */
+            right: -2px;     /* Hides right border */
             z-index: 10;
+            background: #000;
         }
         
         .instagram-embed-cropper iframe {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
             width: 100% !important;
             height: 100% !important;
+            min-height: 100% !important;
             border: none !important;
-            border-radius: 0 !important;
             box-shadow: none !important;
-            min-width: 100% !important;
+            margin: 0 !important;
         }
     </style>
 </head>
@@ -243,15 +247,21 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('year').textContent = new Date().getFullYear();
-            const observerOptions = { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0 };
-            const observer = new IntersectionObserver((entries, observer) => {
+            
+            // Added threshold to make re-triggering smoother
+            const observerOptions = { root: null, rootMargin: '0px 0px -5% 0px', threshold: 0.1 };
+            
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        observer.unobserve(entry.target);
+                    } else {
+                        // This single line resets the animation when you scroll away
+                        entry.target.classList.remove('active');
                     }
                 });
             }, observerOptions);
+
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
             
             setTimeout(() => { if(window.instgrm) { window.instgrm.Embeds.process(); } }, 1500);
