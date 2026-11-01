@@ -1,293 +1,129 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jay Pratap Sikarwar | Premium Video Editing</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Tailwind Config -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        apple: {
-                            bg: '#fbfbfd',
-                            text: '#1d1d1f',
-                            gray: '#86868b',
-                            lightGray: '#f5f5f7',
-                            border: '#d2d2d7'
-                        }
-                    },
-                    boxShadow: {
-                        'apple': '0 4px 24px rgba(0, 0, 0, 0.06)',
-                        'apple-hover': '0 20px 40px rgba(0, 0, 0, 0.15)'
-                    }
-                }
-            }
-        }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jay Pratap Sikarwar | Premium Video Editing</title>
+<meta name="description" content="Jay Pratap Sikarwar, video editor for luxury brands. Reels, ads and premium post-production.">
+<meta property="og:title" content="Jay Pratap Sikarwar | Premium Video Editing">
+<meta property="og:description" content="Premium post-production, engineered for luxury brands.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  colors: { apple: { bg:'#fbfbfd', text:'#1d1d1f', gray:'#86868b', lightGray:'#f5f5f7', border:'#d2d2d7' } },
+  boxShadow: { apple:'0 4px 24px rgba(0,0,0,0.06)' }
+}}}
+</script>
+<style>
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:#fbfbfd; color:#1d1d1f; -webkit-font-smoothing:antialiased; letter-spacing:-0.015em; }
+h1,h2,h3 { letter-spacing:-0.03em; }
+.reveal { opacity:0; transform:translateY(32px); transition:opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1); }
+.reveal.active { opacity:1; transform:none; }
+@media (prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none} }
 
-    <!-- Custom CSS for Apple Aesthetic & Animations -->
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: theme('colors.apple.bg');
-            color: theme('colors.apple.text');
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            letter-spacing: -0.015em;
-        }
-
-        h1, h2, h3, h4, h5, h6 { letter-spacing: -0.03em; }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            filter: blur(5px);
-            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform, filter;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-            filter: blur(0);
-        }
-        .delay-100 { transition-delay: 100ms; }
-        .delay-200 { transition-delay: 200ms; }
-        .delay-300 { transition-delay: 300ms; }
-
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #fbfbfd; }
-        ::-webkit-scrollbar-thumb { background: #d2d2d7; border-radius: 5px; border: 2px solid #fbfbfd; }
-        ::-webkit-scrollbar-thumb:hover { background: #86868b; }
-
-        /* ULTRA-AGGRESSIVE INSTAGRAM CROPPER */
-        /* Forces the native UI completely out of bounds */
-        .instagram-embed-cropper {
-            position: absolute;
-            top: -55px;      /* Hides top header */
-            left: -5px;      /* Hides left border */
-            right: -5px;     /* Hides right border */
-            bottom: -200px;  /* Brutally forces the entire white comment/like section out of the card */
-            z-index: 10;
-            background: #000;
-        }
-        
-        .instagram-embed-cropper iframe {
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            border: none !important;
-            box-shadow: none !important;
-            margin: 0 !important;
-        }
-    </style>
+/* Reel media. If any Instagram UI still shows, tune these two numbers. */
+.reel-media { --crop-top:58px; --crop-bottom:220px; position:absolute; inset:0; background:#000; }
+.reel-media iframe { position:absolute; left:0; width:100%; border:0; background:#000;
+  top:calc(var(--crop-top) * -1); height:calc(100% + var(--crop-top) + var(--crop-bottom)); }
+.reel-media video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; cursor:pointer; }
+</style>
 </head>
 <body class="selection:bg-black selection:text-white">
 
-    <nav class="fixed w-full top-0 z-50 bg-white/70 backdrop-blur-md border-b border-black/5 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <span class="text-sm font-semibold tracking-tight text-apple-text">J.P.S.</span>
-            <a href="#contact" class="text-sm font-medium text-apple-text hover:text-apple-gray transition-colors">Contact</a>
+<nav class="fixed w-full top-0 z-50 bg-white/70 backdrop-blur-md border-b border-black/5">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#top" class="text-sm font-semibold">J.P.S.</a>
+    <div class="flex gap-6 text-sm font-medium">
+      <a href="#works" class="hover:text-apple-gray transition-colors">Works</a>
+      <a href="#contact" class="hover:text-apple-gray transition-colors">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header id="top" class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-16">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="reveal text-xs md:text-sm font-semibold tracking-widest text-apple-gray uppercase mb-4">Portfolio</h2>
+    <h1 class="reveal text-5xl md:text-7xl lg:text-[5.5rem] font-bold mb-6 leading-[1.05]" style="transition-delay:100ms">Jay Pratap Sikarwar.</h1>
+    <p class="reveal text-xl md:text-2xl text-apple-gray max-w-2xl mx-auto leading-relaxed" style="transition-delay:200ms">Premium post-production.<br class="hidden md:block"> Engineered for luxury brands.</p>
+    <div class="reveal mt-12" style="transition-delay:300ms">
+      <a href="#works" class="inline-block bg-apple-text hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-medium transition-colors shadow-md">View selected works</a>
+    </div>
+  </div>
+</header>
+
+<section id="works" class="py-32 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal mb-20 text-center">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">Selected Works.</h2>
+      <p class="text-apple-gray text-xl">A showcase of high-performing luxury content.</p>
+    </div>
+    <div id="reel-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto"></div>
+  </div>
+</section>
+
+<section id="contact" class="py-32 px-6 bg-white border-t border-apple-border/40">
+  <div class="max-w-5xl mx-auto text-center reveal">
+    <h2 class="text-4xl md:text-5xl font-bold mb-6">Connect.</h2>
+    <p class="text-apple-gray text-xl mb-16 max-w-2xl mx-auto">Available for freelance work and direct luxury brand partnerships.</p>
+    <div class="flex flex-col md:flex-row justify-center items-center gap-6 mb-20">
+      <a href="mailto:jaypratapsinghsikarwar564@gmail.com" class="w-full md:w-auto px-8 py-4 bg-apple-lightGray rounded-full font-semibold hover:bg-black hover:text-white transition-colors">Email me</a>
+      <a href="https://wa.me/917999152081" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto px-8 py-4 bg-apple-lightGray rounded-full font-semibold hover:bg-[#25D366] hover:text-white transition-colors">WhatsApp</a>
+      <a href="https://www.instagram.com/jay_pratap_sikarwar_/" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto px-8 py-4 bg-apple-lightGray rounded-full font-semibold hover:bg-gradient-to-r hover:from-[#833ab4] hover:via-[#fd1d1d] hover:to-[#fcb045] hover:text-white transition-colors">Instagram</a>
+    </div>
+    <div class="text-sm text-apple-gray border-t border-apple-border/40 pt-8">&copy; <span id="year"></span> Jay Pratap Sikarwar. All rights reserved.</div>
+  </div>
+</section>
+
+<script>
+/* Edit your reels here. To use your own clean video file instead of the Instagram embed,
+   add  video: 'reels/reel1.mp4'  (and optionally poster: 'reels/reel1.jpg'). */
+const reels = [
+  { id:'DbtEvulBWW7', brand:'Happily Ever Time Pieces', handle:'happilyever...', initials:'HE', profile:'https://www.instagram.com/happilyevertimepieces/', views:'420k+' },
+  { id:'Dd7DgfIBwab', brand:'Happily Ever Time Pieces', handle:'happilyever...', initials:'HE', profile:'https://www.instagram.com/happilyevertimepieces/', views:'180k+' },
+  { id:'DdJrg0xzPwS', brand:'Wolfridge Watch',          handle:'wolfridge_...',  initials:'WW', profile:'https://www.instagram.com/wolfridge_watch/',       views:'158k+', color:'#3e4835' }
+];
+
+const eye = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>';
+const ext = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>';
+
+document.getElementById('reel-grid').innerHTML = reels.map((r, i) => {
+  const url = `https://www.instagram.com/reel/${r.id}/`;
+  const media = r.video
+    ? `<video src="${r.video}" ${r.poster ? `poster="${r.poster}"` : ''} muted loop playsinline preload="metadata" onclick="this.paused ? this.play() : this.pause()"></video>`
+    : `<iframe src="${url}embed/" loading="lazy" scrolling="no" allowfullscreen title="${r.brand} reel"></iframe>`;
+  return `
+  <div class="reveal flex flex-col items-center" style="transition-delay:${i * 100}ms">
+    <div class="relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-[32px] overflow-hidden shadow-apple hover:shadow-2xl hover:-translate-y-3 transition-all duration-300 border-[6px] border-white">
+      <div class="reel-media">${media}</div>
+      <div class="absolute top-0 left-0 w-full px-4 pt-4 pb-8 flex items-center justify-between z-20 bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full flex items-center justify-center border border-white/20" style="background:${r.color || '#fff'}">
+            <span class="text-[10px] font-bold" style="color:${r.color ? '#fff' : '#000'}">${r.initials}</span>
+          </div>
+          <span class="text-white text-sm font-semibold drop-shadow-md">${r.handle}</span>
         </div>
-    </nav>
+        <a href="${r.profile}" target="_blank" rel="noopener noreferrer" class="pointer-events-auto px-4 py-1.5 bg-white/20 hover:bg-white text-white hover:text-black backdrop-blur-md rounded-full text-xs font-bold transition-colors border border-white/30">View profile</a>
+      </div>
+      <div class="absolute bottom-0 left-0 w-full h-28 bg-gradient-to-t from-black/70 to-transparent z-20 pointer-events-none"></div>
+      <div class="absolute bottom-6 left-0 w-full flex justify-center z-30 pointer-events-none">
+        <a href="${url}" target="_blank" rel="noopener noreferrer" class="pointer-events-auto px-6 py-2.5 bg-white/25 hover:bg-white text-white hover:text-black backdrop-blur-xl rounded-full text-sm font-semibold transition-colors border border-white/30 flex items-center gap-2">${ext} View on Instagram</a>
+      </div>
+    </div>
+    <div class="mt-6 text-center">
+      <h3 class="text-xl font-semibold">${r.brand}</h3>
+      <p class="text-sm text-apple-gray mt-2 flex items-center justify-center gap-1.5 font-medium">${eye} ${r.views} views</p>
+    </div>
+  </div>`;
+}).join('');
 
-    <header class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative pt-16">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="reveal text-xs md:text-sm font-semibold tracking-widest text-apple-gray uppercase mb-4">Portfolio</h2>
-            <h1 class="reveal delay-100 text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-apple-text mb-6 leading-[1.05]">Jay Pratap Sikarwar.</h1>
-            <p class="reveal delay-200 text-xl md:text-2xl text-apple-gray font-normal max-w-2xl mx-auto leading-relaxed">Premium Post-Production.<br class="hidden md:block"> Engineered for luxury brands.</p>
-            <div class="reveal delay-300 mt-12">
-                <a href="#works" class="inline-block bg-apple-text hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg">View Selected Works</a>
-            </div>
-        </div>
-    </header>
+document.getElementById('year').textContent = new Date().getFullYear();
 
-    <section id="works" class="py-32 px-6 bg-apple-bg min-h-screen">
-        <div class="max-w-7xl mx-auto">
-            <div class="reveal mb-20 text-center">
-                <h2 class="text-4xl md:text-5xl font-bold text-apple-text mb-4">Selected Works.</h2>
-                <p class="text-apple-gray text-xl font-normal">A showcase of high-performing luxury content.</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
-                
-                <!-- Reel 1 -->
-                <div class="reveal delay-100 flex flex-col items-center">
-                    <!-- Hover Pop-Up Animation Fixed Here: -translate-y-4 and faster duration -->
-                    <div class="relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-[32px] overflow-hidden shadow-apple hover:shadow-2xl hover:-translate-y-4 transition-all duration-300 ease-out border-[6px] border-white cursor-pointer">
-                        
-                        <!-- STATIC Top Header Overlay (Always visible) -->
-                        <div class="absolute top-0 left-0 w-full px-4 pt-4 pb-8 flex items-center justify-between z-20 bg-gradient-to-b from-black/80 to-transparent">
-                            <div class="flex items-center gap-2">
-                                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden border border-white/20 shadow-sm">
-                                    <span class="text-[10px] font-bold text-black">CJ</span>
-                                </div>
-                                <span class="text-white text-sm font-semibold tracking-tight shadow-sm drop-shadow-md">happilyever...</span>
-                            </div>
-                            <a href="https://www.instagram.com/happilyevertimepieces/" target="_blank" class="px-4 py-1.5 bg-white/20 hover:bg-white text-white hover:text-black backdrop-blur-md rounded-full text-xs font-bold transition-all border border-white/30 shadow-sm">
-                                View Profile
-                            </a>
-                        </div>
-
-                        <!-- Instagram Cropper -->
-                        <div class="instagram-embed-cropper">
-                            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DbtEvulBWW7/" data-instgrm-version="14"></blockquote>
-                        </div>
-
-                        <!-- STATIC Bottom Button Overlay (Always visible, no reveal nonsense) -->
-                        <div class="absolute bottom-6 left-0 w-full flex justify-center z-20">
-                            <a href="https://www.instagram.com/reel/DbtEvulBWW7/" target="_blank" class="px-6 py-2.5 bg-white/25 hover:bg-white text-white hover:text-black backdrop-blur-xl rounded-full text-sm font-semibold transition-colors duration-300 border border-white/30 shadow-[0_4px_24px_rgba(0,0,0,0.3)] flex items-center gap-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                                View on Instagram
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-6 text-center w-full max-w-[320px]">
-                        <h3 class="text-xl font-semibold text-apple-text">Project One</h3>
-                        <p class="text-sm text-apple-gray mt-2 flex items-center justify-center gap-1.5 font-medium">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                            420k+ Views
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Reel 2 -->
-                <div class="reveal delay-200 flex flex-col items-center">
-                    <div class="relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-[32px] overflow-hidden shadow-apple hover:shadow-2xl hover:-translate-y-4 transition-all duration-300 ease-out border-[6px] border-white cursor-pointer">
-                        
-                        <!-- STATIC Top Header Overlay -->
-                        <div class="absolute top-0 left-0 w-full px-4 pt-4 pb-8 flex items-center justify-between z-20 bg-gradient-to-b from-black/80 to-transparent">
-                            <div class="flex items-center gap-2">
-                                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden border border-white/20 shadow-sm">
-                                    <span class="text-[10px] font-bold text-black">CJ</span>
-                                </div>
-                                <span class="text-white text-sm font-semibold tracking-tight shadow-sm drop-shadow-md">happilyever...</span>
-                            </div>
-                            <a href="https://www.instagram.com/happilyevertimepieces/" target="_blank" class="px-4 py-1.5 bg-white/20 hover:bg-white text-white hover:text-black backdrop-blur-md rounded-full text-xs font-bold transition-all border border-white/30 shadow-sm">
-                                View Profile
-                            </a>
-                        </div>
-
-                        <!-- Instagram Cropper -->
-                        <div class="instagram-embed-cropper">
-                            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/Dd7DgfIBwab/" data-instgrm-version="14"></blockquote>
-                        </div>
-
-                        <!-- STATIC Bottom Button Overlay -->
-                        <div class="absolute bottom-6 left-0 w-full flex justify-center z-20">
-                            <a href="https://www.instagram.com/reel/Dd7DgfIBwab/" target="_blank" class="px-6 py-2.5 bg-white/25 hover:bg-white text-white hover:text-black backdrop-blur-xl rounded-full text-sm font-semibold transition-colors duration-300 border border-white/30 shadow-[0_4px_24px_rgba(0,0,0,0.3)] flex items-center gap-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                                View on Instagram
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-6 text-center w-full max-w-[320px]">
-                        <h3 class="text-xl font-semibold text-apple-text">Project Two</h3>
-                        <p class="text-sm text-apple-gray mt-2 flex items-center justify-center gap-1.5 font-medium">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                            180k+ Views
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Reel 3 -->
-                <div class="reveal delay-300 flex flex-col items-center">
-                    <div class="relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-[32px] overflow-hidden shadow-apple hover:shadow-2xl hover:-translate-y-4 transition-all duration-300 ease-out border-[6px] border-white cursor-pointer">
-                        
-                        <!-- STATIC Top Header Overlay -->
-                        <div class="absolute top-0 left-0 w-full px-4 pt-4 pb-8 flex items-center justify-between z-20 bg-gradient-to-b from-black/80 to-transparent">
-                            <div class="flex items-center gap-2">
-                                <div class="w-8 h-8 rounded-full bg-[#3e4835] flex items-center justify-center overflow-hidden border border-white/20 shadow-sm">
-                                    <span class="text-[10px] font-bold text-white">WW</span>
-                                </div>
-                                <span class="text-white text-sm font-semibold tracking-tight shadow-sm drop-shadow-md">wolfridge_...</span>
-                            </div>
-                            <a href="https://www.instagram.com/wolfridge_watch/" target="_blank" class="px-4 py-1.5 bg-white/20 hover:bg-white text-white hover:text-black backdrop-blur-md rounded-full text-xs font-bold transition-all border border-white/30 shadow-sm">
-                                View Profile
-                            </a>
-                        </div>
-
-                        <!-- Instagram Cropper -->
-                        <div class="instagram-embed-cropper">
-                            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DdJrg0xzPwS/" data-instgrm-version="14"></blockquote>
-                        </div>
-
-                        <!-- STATIC Bottom Button Overlay -->
-                        <div class="absolute bottom-6 left-0 w-full flex justify-center z-20">
-                            <a href="https://www.instagram.com/reel/DdJrg0xzPwS/" target="_blank" class="px-6 py-2.5 bg-white/25 hover:bg-white text-white hover:text-black backdrop-blur-xl rounded-full text-sm font-semibold transition-colors duration-300 border border-white/30 shadow-[0_4px_24px_rgba(0,0,0,0.3)] flex items-center gap-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                                View on Instagram
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-6 text-center w-full max-w-[320px]">
-                        <h3 class="text-xl font-semibold text-apple-text">Project Three</h3>
-                        <p class="text-sm text-apple-gray mt-2 flex items-center justify-center gap-1.5 font-medium">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                            158k+ Views
-                        </p>
-                    </div>
-                </div>
-
-                <!-- REQUIRED: Script -->
-                <script async src="//www.instagram.com/embed.js"></script>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="py-32 px-6 bg-white border-t border-apple-border/40">
-        <div class="max-w-5xl mx-auto text-center reveal">
-            <h2 class="text-4xl md:text-5xl font-bold text-apple-text mb-6">Connect.</h2>
-            <p class="text-apple-gray text-xl font-normal mb-16 max-w-2xl mx-auto">Available for freelance opportunities and direct luxury brand partnerships.</p>
-            
-            <div class="flex flex-col md:flex-row justify-center items-center gap-6 mb-20">
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=jaypratapsinghsikarwar564@gmail.com" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto px-8 py-4 bg-apple-lightGray rounded-full text-apple-text font-semibold hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center gap-3">
-                    Email Me
-                </a>
-                <a href="https://wa.me/7999152081" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto px-8 py-4 bg-apple-lightGray rounded-full text-apple-text font-semibold hover:bg-[#25D366] hover:text-white transition-all duration-300 flex items-center justify-center gap-3">
-                    WhatsApp
-                </a>
-                <a href="https://www.instagram.com/jay_pratap_sikarwar_/" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto px-8 py-4 bg-apple-lightGray rounded-full text-apple-text font-semibold hover:bg-gradient-to-r hover:from-[#833ab4] hover:via-[#fd1d1d] hover:to-[#fcb045] hover:text-white transition-all duration-300 flex items-center justify-center gap-3">
-                    Instagram
-                </a>
-            </div>
-
-            <div class="mt-12 text-sm text-apple-gray font-normal border-t border-apple-border/40 pt-8">
-                &copy; <span id="year"></span> Jay Pratap Sikarwar. All rights reserved.
-            </div>
-        </div>
-    </section>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('year').textContent = new Date().getFullYear();
-            
-            const observerOptions = { root: null, rootMargin: '0px 0px -5% 0px', threshold: 0.1 };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    } else {
-                        entry.target.classList.remove('active');
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-            
-            setTimeout(() => { if(window.instgrm) { window.instgrm.Embeds.process(); } }, 1500);
-        });
-    </script>
+const io = new IntersectionObserver(entries => entries.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('active'); io.unobserve(e.target); }
+}), { rootMargin: '0px 0px -5% 0px', threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
 </body>
 </html>
