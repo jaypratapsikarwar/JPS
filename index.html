@@ -33,7 +33,6 @@
 
     <!-- Custom CSS for Apple Aesthetic & Animations -->
     <style>
-        /* Apple System Font Stack */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: theme('colors.apple.bg');
@@ -43,11 +42,8 @@
             letter-spacing: -0.015em;
         }
 
-        h1, h2, h3, h4, h5, h6 {
-            letter-spacing: -0.03em;
-        }
+        h1, h2, h3, h4, h5, h6 { letter-spacing: -0.03em; }
 
-        /* Apple-style smooth reveal animations */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -55,82 +51,61 @@
             transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform, filter;
         }
-        
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
             filter: blur(0);
         }
-
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
         .delay-300 { transition-delay: 300ms; }
 
-        /* Minimalist Scrollbar */
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: #fbfbfd; }
-        ::-webkit-scrollbar-thumb {
-            background: #d2d2d7;
-            border-radius: 5px;
-            border: 2px solid #fbfbfd;
-        }
+        ::-webkit-scrollbar-thumb { background: #d2d2d7; border-radius: 5px; border: 2px solid #fbfbfd; }
         ::-webkit-scrollbar-thumb:hover { background: #86868b; }
 
-        /* Instagram Embed Overrides */
-        .instagram-embed-container {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #000;
+        /* ADVANCED INSTAGRAM CROPPER */
+        /* This hides Instagram's ugly native UI and black bars */
+        .instagram-embed-cropper {
+            position: absolute;
+            top: -65px; /* Hides Instagram native header */
+            left: -3%;  /* Hides left black bar */
+            width: 106%; /* Hides right black bar */
+            height: calc(100% + 180px); /* Hides Instagram bottom action bar */
+            z-index: 10;
         }
         
-        /* Force iframe to stretch and hide native white padding */
-        .instagram-embed-container iframe {
-            min-width: 100% !important;
+        .instagram-embed-cropper iframe {
             width: 100% !important;
-            height: 105% !important; /* Slight overstretch to hide borders */
-            margin: -2% 0 0 0 !important;
+            height: 100% !important;
             border: none !important;
+            border-radius: 0 !important;
             box-shadow: none !important;
+            min-width: 100% !important;
         }
     </style>
 </head>
 <body class="selection:bg-black selection:text-white">
 
-    <!-- Frosted Glass Navigation -->
     <nav class="fixed w-full top-0 z-50 bg-white/70 backdrop-blur-md border-b border-black/5 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <span class="text-sm font-semibold tracking-tight text-apple-text">J.P.S.</span>
-            <a href="#contact" class="text-sm font-medium text-apple-text hover:text-apple-gray transition-colors">
-                Contact
-            </a>
+            <a href="#contact" class="text-sm font-medium text-apple-text hover:text-apple-gray transition-colors">Contact</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <header class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative pt-16">
         <div class="max-w-4xl mx-auto">
-            <h2 class="reveal text-xs md:text-sm font-semibold tracking-widest text-apple-gray uppercase mb-4">
-                Portfolio
-            </h2>
-            <h1 class="reveal delay-100 text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-apple-text mb-6 leading-[1.05]">
-                Jay Pratap Sikarwar.
-            </h1>
-            <p class="reveal delay-200 text-xl md:text-2xl text-apple-gray font-normal max-w-2xl mx-auto leading-relaxed">
-                Premium Post-Production.<br class="hidden md:block"> Engineered for luxury brands.
-            </p>
+            <h2 class="reveal text-xs md:text-sm font-semibold tracking-widest text-apple-gray uppercase mb-4">Portfolio</h2>
+            <h1 class="reveal delay-100 text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-apple-text mb-6 leading-[1.05]">Jay Pratap Sikarwar.</h1>
+            <p class="reveal delay-200 text-xl md:text-2xl text-apple-gray font-normal max-w-2xl mx-auto leading-relaxed">Premium Post-Production.<br class="hidden md:block"> Engineered for luxury brands.</p>
             <div class="reveal delay-300 mt-12">
-                <a href="#works" class="inline-block bg-apple-text hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg">
-                    View Selected Works
-                </a>
+                <a href="#works" class="inline-block bg-apple-text hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg">View Selected Works</a>
             </div>
         </div>
     </header>
 
-    <!-- Selected Works (Reels Grid) -->
     <section id="works" class="py-32 px-6 bg-apple-bg min-h-screen">
         <div class="max-w-7xl mx-auto">
             <div class="reveal mb-20 text-center">
@@ -138,19 +113,34 @@
                 <p class="text-apple-gray text-xl font-normal">A showcase of high-performing luxury content.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
                 
                 <!-- Reel 1 -->
                 <div class="reveal delay-100 flex flex-col items-center">
-                    <div class="relative w-full max-w-[350px] aspect-[9/16] bg-black rounded-3xl overflow-hidden shadow-apple hover:shadow-apple-hover transition-shadow duration-500 border border-apple-border/30">
-                        <div class="instagram-embed-container">
+                    <div class="relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-[32px] overflow-hidden shadow-apple hover:shadow-apple-hover transition-shadow duration-500 border-[6px] border-white">
+                        
+                        <!-- Custom Premium Header Overlay -->
+                        <div class="absolute top-0 left-0 w-full px-4 pt-4 pb-8 flex items-center justify-between z-20 bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
+                            <div class="flex items-center gap-2 pointer-events-auto">
+                                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden border border-white/20">
+                                    <span class="text-[10px] font-bold text-black">CJ</span>
+                                </div>
+                                <span class="text-white text-sm font-semibold tracking-tight shadow-sm">happilyever...</span>
+                            </div>
+                            <a href="https://www.instagram.com/happilyevertimepieces/" target="_blank" class="pointer-events-auto px-4 py-1.5 bg-white/20 hover:bg-white text-white hover:text-black backdrop-blur-md rounded-full text-xs font-bold transition-all border border-white/30 shadow-sm">
+                                View Profile
+                            </a>
+                        </div>
+
+                        <!-- Instagram Cropper -->
+                        <div class="instagram-embed-cropper">
                             <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DbtEvulBWW7/" data-instgrm-version="14"></blockquote>
                         </div>
                     </div>
-                    <!-- Metadata Outside Video -->
-                    <div class="mt-5 text-center w-full max-w-[350px]">
-                        <h3 class="text-lg font-semibold text-apple-text">Project One</h3>
-                        <p class="text-sm text-apple-gray mt-1 flex items-center justify-center gap-1.5">
+                    
+                    <div class="mt-6 text-center w-full max-w-[320px]">
+                        <h3 class="text-xl font-semibold text-apple-text">Project One</h3>
+                        <p class="text-sm text-apple-gray mt-2 flex items-center justify-center gap-1.5 font-medium">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                             420k+ Views
                         </p>
@@ -159,14 +149,30 @@
 
                 <!-- Reel 2 -->
                 <div class="reveal delay-200 flex flex-col items-center">
-                    <div class="relative w-full max-w-[350px] aspect-[9/16] bg-black rounded-3xl overflow-hidden shadow-apple hover:shadow-apple-hover transition-shadow duration-500 border border-apple-border/30">
-                        <div class="instagram-embed-container">
+                    <div class="relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-[32px] overflow-hidden shadow-apple hover:shadow-apple-hover transition-shadow duration-500 border-[6px] border-white">
+                        
+                        <!-- Custom Premium Header Overlay -->
+                        <div class="absolute top-0 left-0 w-full px-4 pt-4 pb-8 flex items-center justify-between z-20 bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
+                            <div class="flex items-center gap-2 pointer-events-auto">
+                                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden border border-white/20">
+                                    <span class="text-[10px] font-bold text-black">CJ</span>
+                                </div>
+                                <span class="text-white text-sm font-semibold tracking-tight shadow-sm">happilyever...</span>
+                            </div>
+                            <a href="https://www.instagram.com/happilyevertimepieces/" target="_blank" class="pointer-events-auto px-4 py-1.5 bg-white/20 hover:bg-white text-white hover:text-black backdrop-blur-md rounded-full text-xs font-bold transition-all border border-white/30 shadow-sm">
+                                View Profile
+                            </a>
+                        </div>
+
+                        <!-- Instagram Cropper -->
+                        <div class="instagram-embed-cropper">
                             <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/Dd7DgfIBwab/" data-instgrm-version="14"></blockquote>
                         </div>
                     </div>
-                    <div class="mt-5 text-center w-full max-w-[350px]">
-                        <h3 class="text-lg font-semibold text-apple-text">Project Two</h3>
-                        <p class="text-sm text-apple-gray mt-1 flex items-center justify-center gap-1.5">
+                    
+                    <div class="mt-6 text-center w-full max-w-[320px]">
+                        <h3 class="text-xl font-semibold text-apple-text">Project Two</h3>
+                        <p class="text-sm text-apple-gray mt-2 flex items-center justify-center gap-1.5 font-medium">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                             180k+ Views
                         </p>
@@ -175,28 +181,42 @@
 
                 <!-- Reel 3 -->
                 <div class="reveal delay-300 flex flex-col items-center">
-                    <div class="relative w-full max-w-[350px] aspect-[9/16] bg-black rounded-3xl overflow-hidden shadow-apple hover:shadow-apple-hover transition-shadow duration-500 border border-apple-border/30">
-                        <div class="instagram-embed-container">
+                    <div class="relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-[32px] overflow-hidden shadow-apple hover:shadow-apple-hover transition-shadow duration-500 border-[6px] border-white">
+                        
+                        <!-- Custom Premium Header Overlay -->
+                        <div class="absolute top-0 left-0 w-full px-4 pt-4 pb-8 flex items-center justify-between z-20 bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
+                            <div class="flex items-center gap-2 pointer-events-auto">
+                                <div class="w-8 h-8 rounded-full bg-[#3e4835] flex items-center justify-center overflow-hidden border border-white/20">
+                                    <span class="text-[10px] font-bold text-white">WW</span>
+                                </div>
+                                <span class="text-white text-sm font-semibold tracking-tight shadow-sm">wolfridge_...</span>
+                            </div>
+                            <a href="https://www.instagram.com/wolfridge_watch/" target="_blank" class="pointer-events-auto px-4 py-1.5 bg-white/20 hover:bg-white text-white hover:text-black backdrop-blur-md rounded-full text-xs font-bold transition-all border border-white/30 shadow-sm">
+                                View Profile
+                            </a>
+                        </div>
+
+                        <!-- Instagram Cropper -->
+                        <div class="instagram-embed-cropper">
                             <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DdJrg0xzPwS/" data-instgrm-version="14"></blockquote>
                         </div>
                     </div>
-                    <div class="mt-5 text-center w-full max-w-[350px]">
-                        <h3 class="text-lg font-semibold text-apple-text">Project Three</h3>
-                        <p class="text-sm text-apple-gray mt-1 flex items-center justify-center gap-1.5">
+                    
+                    <div class="mt-6 text-center w-full max-w-[320px]">
+                        <h3 class="text-xl font-semibold text-apple-text">Project Three</h3>
+                        <p class="text-sm text-apple-gray mt-2 flex items-center justify-center gap-1.5 font-medium">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                             158k+ Views
                         </p>
                     </div>
                 </div>
-                
-                <!-- REQUIRED: Instagram Script to make the embeds load -->
-                <script async src="//www.instagram.com/embed.js"></script>
 
+                <!-- REQUIRED: Script -->
+                <script async src="//www.instagram.com/embed.js"></script>
             </div>
         </div>
     </section>
 
-    <!-- Contact & Footer Section -->
     <section id="contact" class="py-32 px-6 bg-white border-t border-apple-border/40">
         <div class="max-w-5xl mx-auto text-center reveal">
             <h2 class="text-4xl md:text-5xl font-bold text-apple-text mb-6">Connect.</h2>
@@ -220,7 +240,6 @@
         </div>
     </section>
 
-    <!-- JavaScript for Apple-style Scroll Animations -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('year').textContent = new Date().getFullYear();
@@ -235,7 +254,6 @@
             }, observerOptions);
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
             
-            // Re-process Instagram embeds if they fail to load initially
             setTimeout(() => { if(window.instgrm) { window.instgrm.Embeds.process(); } }, 1500);
         });
     </script>
