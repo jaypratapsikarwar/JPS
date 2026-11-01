@@ -24,7 +24,7 @@
                     },
                     boxShadow: {
                         'apple': '0 4px 24px rgba(0, 0, 0, 0.06)',
-                        'apple-hover': '0 10px 40px rgba(0, 0, 0, 0.12)'
+                        'apple-hover': '0 20px 40px rgba(0, 0, 0, 0.15)'
                     }
                 }
             }
@@ -65,19 +65,22 @@
         ::-webkit-scrollbar-thumb { background: #d2d2d7; border-radius: 5px; border: 2px solid #fbfbfd; }
         ::-webkit-scrollbar-thumb:hover { background: #86868b; }
 
-        /* ADVANCED INSTAGRAM CROPPER */
-        /* Exact math to push the header and footer completely out of the card */
+        /* ADVANCED HARD-CROPPER */
+        /* This forces the Instagram iframe to stretch 300px BELOW the visible card, chopping off the footer entirely */
         .instagram-embed-cropper {
             position: absolute;
-            top: -54px; /* Hides exact height of Instagram header */
-            left: -2px;
-            width: calc(100% + 4px);
-            height: calc(100% + 220px); /* Stretches the frame to push the white footer out of bounds */
+            top: -55px;      /* Crops the top header */
+            left: -4px;      /* Crops left border */
+            right: -4px;     /* Crops right border */
+            bottom: -300px;  /* Aggressively forces the footer completely out of the visible card */
             z-index: 10;
             background: #000;
         }
         
         .instagram-embed-cropper iframe {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
             width: 100% !important;
             height: 100% !important;
             border: none !important;
@@ -117,15 +120,16 @@
                 
                 <!-- Reel 1 -->
                 <div class="reveal delay-100 flex flex-col items-center">
-                    <div class="relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-[32px] overflow-hidden shadow-apple hover:shadow-apple-hover transition-shadow duration-500 border-[6px] border-white">
+                    <!-- Added group class, hover:-translate-y-3, and hover:shadow-apple-hover for the pop-up animation -->
+                    <div class="group relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-[32px] overflow-hidden shadow-apple hover:shadow-apple-hover hover:-translate-y-3 transition-all duration-500 border-[6px] border-white cursor-pointer">
                         
                         <!-- Top Header Overlay -->
-                        <div class="absolute top-0 left-0 w-full px-4 pt-4 pb-8 flex items-center justify-between z-20 bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
+                        <div class="absolute top-0 left-0 w-full px-4 pt-4 pb-8 flex items-center justify-between z-20 bg-gradient-to-b from-black/80 to-transparent pointer-events-none transition-opacity duration-300">
                             <div class="flex items-center gap-2 pointer-events-auto">
-                                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden border border-white/20">
+                                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden border border-white/20 shadow-sm">
                                     <span class="text-[10px] font-bold text-black">CJ</span>
                                 </div>
-                                <span class="text-white text-sm font-semibold tracking-tight shadow-sm">happilyever...</span>
+                                <span class="text-white text-sm font-semibold tracking-tight shadow-sm drop-shadow-md">happilyever...</span>
                             </div>
                             <a href="https://www.instagram.com/happilyevertimepieces/" target="_blank" class="pointer-events-auto px-4 py-1.5 bg-white/20 hover:bg-white text-white hover:text-black backdrop-blur-md rounded-full text-xs font-bold transition-all border border-white/30 shadow-sm">
                                 View Profile
@@ -137,10 +141,10 @@
                             <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DbtEvulBWW7/" data-instgrm-version="14"></blockquote>
                         </div>
 
-                        <!-- Floating Bottom Button Overlay -->
-                        <div class="absolute bottom-6 left-0 w-full flex justify-center z-20 pointer-events-none">
-                            <a href="https://www.instagram.com/reel/DbtEvulBWW7/" target="_blank" class="pointer-events-auto px-5 py-2 bg-black/40 hover:bg-black/60 backdrop-blur-xl text-white rounded-full text-xs font-bold transition-all border border-white/20 shadow-sm flex items-center gap-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        <!-- Frosted Glass View Button Overlay -->
+                        <div class="absolute bottom-6 left-0 w-full flex justify-center z-20 pointer-events-none opacity-90 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-500">
+                            <a href="https://www.instagram.com/reel/DbtEvulBWW7/" target="_blank" class="pointer-events-auto px-6 py-2.5 bg-white/25 hover:bg-white text-white hover:text-black backdrop-blur-xl rounded-full text-sm font-semibold transition-all duration-300 border border-white/30 shadow-[0_4px_24px_rgba(0,0,0,0.3)] flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                                 View on Instagram
                             </a>
                         </div>
@@ -157,15 +161,15 @@
 
                 <!-- Reel 2 -->
                 <div class="reveal delay-200 flex flex-col items-center">
-                    <div class="relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-[32px] overflow-hidden shadow-apple hover:shadow-apple-hover transition-shadow duration-500 border-[6px] border-white">
+                    <div class="group relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-[32px] overflow-hidden shadow-apple hover:shadow-apple-hover hover:-translate-y-3 transition-all duration-500 border-[6px] border-white cursor-pointer">
                         
                         <!-- Top Header Overlay -->
-                        <div class="absolute top-0 left-0 w-full px-4 pt-4 pb-8 flex items-center justify-between z-20 bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
+                        <div class="absolute top-0 left-0 w-full px-4 pt-4 pb-8 flex items-center justify-between z-20 bg-gradient-to-b from-black/80 to-transparent pointer-events-none transition-opacity duration-300">
                             <div class="flex items-center gap-2 pointer-events-auto">
-                                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden border border-white/20">
+                                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden border border-white/20 shadow-sm">
                                     <span class="text-[10px] font-bold text-black">CJ</span>
                                 </div>
-                                <span class="text-white text-sm font-semibold tracking-tight shadow-sm">happilyever...</span>
+                                <span class="text-white text-sm font-semibold tracking-tight shadow-sm drop-shadow-md">happilyever...</span>
                             </div>
                             <a href="https://www.instagram.com/happilyevertimepieces/" target="_blank" class="pointer-events-auto px-4 py-1.5 bg-white/20 hover:bg-white text-white hover:text-black backdrop-blur-md rounded-full text-xs font-bold transition-all border border-white/30 shadow-sm">
                                 View Profile
@@ -177,10 +181,10 @@
                             <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/Dd7DgfIBwab/" data-instgrm-version="14"></blockquote>
                         </div>
 
-                        <!-- Floating Bottom Button Overlay -->
-                        <div class="absolute bottom-6 left-0 w-full flex justify-center z-20 pointer-events-none">
-                            <a href="https://www.instagram.com/reel/Dd7DgfIBwab/" target="_blank" class="pointer-events-auto px-5 py-2 bg-black/40 hover:bg-black/60 backdrop-blur-xl text-white rounded-full text-xs font-bold transition-all border border-white/20 shadow-sm flex items-center gap-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        <!-- Frosted Glass View Button Overlay -->
+                        <div class="absolute bottom-6 left-0 w-full flex justify-center z-20 pointer-events-none opacity-90 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-500">
+                            <a href="https://www.instagram.com/reel/Dd7DgfIBwab/" target="_blank" class="pointer-events-auto px-6 py-2.5 bg-white/25 hover:bg-white text-white hover:text-black backdrop-blur-xl rounded-full text-sm font-semibold transition-all duration-300 border border-white/30 shadow-[0_4px_24px_rgba(0,0,0,0.3)] flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                                 View on Instagram
                             </a>
                         </div>
@@ -197,15 +201,15 @@
 
                 <!-- Reel 3 -->
                 <div class="reveal delay-300 flex flex-col items-center">
-                    <div class="relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-[32px] overflow-hidden shadow-apple hover:shadow-apple-hover transition-shadow duration-500 border-[6px] border-white">
+                    <div class="group relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-[32px] overflow-hidden shadow-apple hover:shadow-apple-hover hover:-translate-y-3 transition-all duration-500 border-[6px] border-white cursor-pointer">
                         
                         <!-- Top Header Overlay -->
-                        <div class="absolute top-0 left-0 w-full px-4 pt-4 pb-8 flex items-center justify-between z-20 bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
+                        <div class="absolute top-0 left-0 w-full px-4 pt-4 pb-8 flex items-center justify-between z-20 bg-gradient-to-b from-black/80 to-transparent pointer-events-none transition-opacity duration-300">
                             <div class="flex items-center gap-2 pointer-events-auto">
-                                <div class="w-8 h-8 rounded-full bg-[#3e4835] flex items-center justify-center overflow-hidden border border-white/20">
+                                <div class="w-8 h-8 rounded-full bg-[#3e4835] flex items-center justify-center overflow-hidden border border-white/20 shadow-sm">
                                     <span class="text-[10px] font-bold text-white">WW</span>
                                 </div>
-                                <span class="text-white text-sm font-semibold tracking-tight shadow-sm">wolfridge_...</span>
+                                <span class="text-white text-sm font-semibold tracking-tight shadow-sm drop-shadow-md">wolfridge_...</span>
                             </div>
                             <a href="https://www.instagram.com/wolfridge_watch/" target="_blank" class="pointer-events-auto px-4 py-1.5 bg-white/20 hover:bg-white text-white hover:text-black backdrop-blur-md rounded-full text-xs font-bold transition-all border border-white/30 shadow-sm">
                                 View Profile
@@ -217,10 +221,10 @@
                             <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DdJrg0xzPwS/" data-instgrm-version="14"></blockquote>
                         </div>
 
-                        <!-- Floating Bottom Button Overlay -->
-                        <div class="absolute bottom-6 left-0 w-full flex justify-center z-20 pointer-events-none">
-                            <a href="https://www.instagram.com/reel/DdJrg0xzPwS/" target="_blank" class="pointer-events-auto px-5 py-2 bg-black/40 hover:bg-black/60 backdrop-blur-xl text-white rounded-full text-xs font-bold transition-all border border-white/20 shadow-sm flex items-center gap-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        <!-- Frosted Glass View Button Overlay -->
+                        <div class="absolute bottom-6 left-0 w-full flex justify-center z-20 pointer-events-none opacity-90 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-500">
+                            <a href="https://www.instagram.com/reel/DdJrg0xzPwS/" target="_blank" class="pointer-events-auto px-6 py-2.5 bg-white/25 hover:bg-white text-white hover:text-black backdrop-blur-xl rounded-full text-sm font-semibold transition-all duration-300 border border-white/30 shadow-[0_4px_24px_rgba(0,0,0,0.3)] flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                                 View on Instagram
                             </a>
                         </div>
