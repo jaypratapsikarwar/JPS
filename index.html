@@ -65,25 +65,21 @@
         ::-webkit-scrollbar-thumb { background: #d2d2d7; border-radius: 5px; border: 2px solid #fbfbfd; }
         ::-webkit-scrollbar-thumb:hover { background: #86868b; }
 
-        /* ADVANCED INSTAGRAM CROPPER (FIXED) */
-        /* Aggressively chops off the top header and bottom comment section */
+        /* ADVANCED INSTAGRAM CROPPER */
+        /* Exact math to push the header and footer completely out of the card */
         .instagram-embed-cropper {
             position: absolute;
-            top: -55px;      /* Crops the top Instagram header */
-            bottom: -160px;  /* Forcefully chops off the entire bottom likes/comments section */
-            left: -2px;      /* Hides left border */
-            right: -2px;     /* Hides right border */
+            top: -54px; /* Hides exact height of Instagram header */
+            left: -2px;
+            width: calc(100% + 4px);
+            height: calc(100% + 220px); /* Stretches the frame to push the white footer out of bounds */
             z-index: 10;
             background: #000;
         }
         
         .instagram-embed-cropper iframe {
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
             width: 100% !important;
             height: 100% !important;
-            min-height: 100% !important;
             border: none !important;
             box-shadow: none !important;
             margin: 0 !important;
@@ -123,7 +119,7 @@
                 <div class="reveal delay-100 flex flex-col items-center">
                     <div class="relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-[32px] overflow-hidden shadow-apple hover:shadow-apple-hover transition-shadow duration-500 border-[6px] border-white">
                         
-                        <!-- Custom Premium Header Overlay -->
+                        <!-- Top Header Overlay -->
                         <div class="absolute top-0 left-0 w-full px-4 pt-4 pb-8 flex items-center justify-between z-20 bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
                             <div class="flex items-center gap-2 pointer-events-auto">
                                 <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden border border-white/20">
@@ -140,6 +136,14 @@
                         <div class="instagram-embed-cropper">
                             <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DbtEvulBWW7/" data-instgrm-version="14"></blockquote>
                         </div>
+
+                        <!-- Floating Bottom Button Overlay -->
+                        <div class="absolute bottom-6 left-0 w-full flex justify-center z-20 pointer-events-none">
+                            <a href="https://www.instagram.com/reel/DbtEvulBWW7/" target="_blank" class="pointer-events-auto px-5 py-2 bg-black/40 hover:bg-black/60 backdrop-blur-xl text-white rounded-full text-xs font-bold transition-all border border-white/20 shadow-sm flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                View on Instagram
+                            </a>
+                        </div>
                     </div>
                     
                     <div class="mt-6 text-center w-full max-w-[320px]">
@@ -155,7 +159,7 @@
                 <div class="reveal delay-200 flex flex-col items-center">
                     <div class="relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-[32px] overflow-hidden shadow-apple hover:shadow-apple-hover transition-shadow duration-500 border-[6px] border-white">
                         
-                        <!-- Custom Premium Header Overlay -->
+                        <!-- Top Header Overlay -->
                         <div class="absolute top-0 left-0 w-full px-4 pt-4 pb-8 flex items-center justify-between z-20 bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
                             <div class="flex items-center gap-2 pointer-events-auto">
                                 <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden border border-white/20">
@@ -172,6 +176,14 @@
                         <div class="instagram-embed-cropper">
                             <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/Dd7DgfIBwab/" data-instgrm-version="14"></blockquote>
                         </div>
+
+                        <!-- Floating Bottom Button Overlay -->
+                        <div class="absolute bottom-6 left-0 w-full flex justify-center z-20 pointer-events-none">
+                            <a href="https://www.instagram.com/reel/Dd7DgfIBwab/" target="_blank" class="pointer-events-auto px-5 py-2 bg-black/40 hover:bg-black/60 backdrop-blur-xl text-white rounded-full text-xs font-bold transition-all border border-white/20 shadow-sm flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                View on Instagram
+                            </a>
+                        </div>
                     </div>
                     
                     <div class="mt-6 text-center w-full max-w-[320px]">
@@ -187,7 +199,7 @@
                 <div class="reveal delay-300 flex flex-col items-center">
                     <div class="relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-[32px] overflow-hidden shadow-apple hover:shadow-apple-hover transition-shadow duration-500 border-[6px] border-white">
                         
-                        <!-- Custom Premium Header Overlay -->
+                        <!-- Top Header Overlay -->
                         <div class="absolute top-0 left-0 w-full px-4 pt-4 pb-8 flex items-center justify-between z-20 bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
                             <div class="flex items-center gap-2 pointer-events-auto">
                                 <div class="w-8 h-8 rounded-full bg-[#3e4835] flex items-center justify-center overflow-hidden border border-white/20">
@@ -203,6 +215,14 @@
                         <!-- Instagram Cropper -->
                         <div class="instagram-embed-cropper">
                             <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DdJrg0xzPwS/" data-instgrm-version="14"></blockquote>
+                        </div>
+
+                        <!-- Floating Bottom Button Overlay -->
+                        <div class="absolute bottom-6 left-0 w-full flex justify-center z-20 pointer-events-none">
+                            <a href="https://www.instagram.com/reel/DdJrg0xzPwS/" target="_blank" class="pointer-events-auto px-5 py-2 bg-black/40 hover:bg-black/60 backdrop-blur-xl text-white rounded-full text-xs font-bold transition-all border border-white/20 shadow-sm flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                View on Instagram
+                            </a>
                         </div>
                     </div>
                     
@@ -248,7 +268,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('year').textContent = new Date().getFullYear();
             
-            // Added threshold to make re-triggering smoother
             const observerOptions = { root: null, rootMargin: '0px 0px -5% 0px', threshold: 0.1 };
             
             const observer = new IntersectionObserver((entries) => {
@@ -256,7 +275,6 @@
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
                     } else {
-                        // This single line resets the animation when you scroll away
                         entry.target.classList.remove('active');
                     }
                 });
